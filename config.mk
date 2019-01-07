@@ -14,11 +14,12 @@ PKG_CONFIG = pkg-config
 
 # includes and libs
 INCS = -I$(X11INC) \
-       `$(PKG_CONFIG) --cflags fontconfig` \
-       `$(PKG_CONFIG) --cflags freetype2`
-LIBS = -L$(X11LIB) -lm -lrt -lX11 -lutil -lXft \
-       `$(PKG_CONFIG) --libs fontconfig` \
-       `$(PKG_CONFIG) --libs freetype2`
+       `pkg-config --cflags fontconfig` \
+       `pkg-config --cflags freetype2`
+# NetBSD users should just symlink librt.* to libc.*
+LIBS = -L$(X11LIB) -lm -lrt -lX11 -lXft \
+       `pkg-config --libs fontconfig` \
+       `pkg-config --libs freetype2`
 
 # flags
 STCPPFLAGS = -DVERSION=\"$(VERSION)\" -D_XOPEN_SOURCE=600
@@ -32,4 +33,6 @@ STLDFLAGS = $(LIBS) $(LDFLAGS)
 #       `pkg-config --libs freetype2`
 
 # compiler and linker
+# compiler and linker: Indeed, I'd rather use SunStudio12.1 (illumos)
+# or Oracle DevStudio12.2+ (all Solaris distros)
 # CC = c99

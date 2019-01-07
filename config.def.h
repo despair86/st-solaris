@@ -4,8 +4,12 @@
  * appearance
  *
  * font: see http://freedesktop.org/software/fontconfig/fontconfig-user.html
+ *
+ * NOTE: get this cool-looking bitmapped outline font from Damien Guard's
+ * website at damieng.com
+ * -despair86
  */
-static char *font = "Liberation Mono:pixelsize=12:antialias=true:autohint=true";
+static char *font = "Envy Code B 10pt:pixelsize=13:antialias=true:autohint=true";
 static int borderpx = 2;
 
 /*

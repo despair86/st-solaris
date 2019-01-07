@@ -1,4 +1,5 @@
 /* See LICENSE for license details. */
+#define __EXTENSIONS__
 #include <ctype.h>
 #include <errno.h>
 #include <fcntl.h>
@@ -26,6 +27,12 @@
  #include <util.h>
 #elif defined(__FreeBSD__) || defined(__DragonFly__)
  #include <libutil.h>
+#endif
+
+#ifdef __sun
+int
+openpty (int *amaster, int *aslave, char *name,
+         struct termios const *termp, struct winsize const *winp);
 #endif
 
 /* Arbitrary sizes */
@@ -800,8 +807,25 @@ ttynew(char *line, char *cmd, char *out, char **args)
 		dup2(s, 0);
 		dup2(s, 1);
 		dup2(s, 2);
-		if (ioctl(s, TIOCSCTTY, NULL) < 0)
-			die("ioctl TIOCSCTTY failed: %s\n", strerror(errno));
+#ifdef TIOCSCTTY
+		if (ioctl (s, TIOCSCTTY, 0) < 0)
+			goto die;
+#else /* !TIOCSTTY */
+        /* Hackery to set controlling tty on SVR4 -
+           on SVR4 the first terminal we open after sesid()
+           becomes our controlling terminal, thus we must
+           find the name of, open, and re-close the tty
+           since we already have it open at this point. */
+        {
+                char *ctty;
+                int ct_fdes;
+
+                ctty = ttyname(s);
+                ct_fdes = open(ctty, O_RDWR);
+                close(ct_fdes);
+        }
+#endif /* !TIOCSTTY */
+die:
 		close(s);
 		close(m);
 #ifdef __OpenBSD__
