@@ -24,7 +24,8 @@ you can manually run `tic -sx st.info`.
 	* `st -e tmux` using C-b [
 	* `st -e screen` using C-a ESC
 * Using the excellent tool of [scroll](https://git.suckless.org/scroll/).
-* Using the scrollback [patch](https://st.suckless.org/patches/scrollback/).
+* Using the scrollback [patch](https://st.suckless.org/patches/scrollback/). 
+(Now included by default.)
 
 
 ## I would like to have utmp and/or scroll functionality by default
