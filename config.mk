@@ -7,8 +7,8 @@ VERSION = 0.8.4
 PREFIX = /usr/local
 MANPREFIX = $(PREFIX)/share/man
 
-X11INC = /usr/X11R6/include
-X11LIB = /usr/X11R6/lib
+X11INC = /usr/openwin/include
+X11LIB = /usr/openwin/lib
 
 PKG_CONFIG = pkg-config
 
@@ -33,6 +33,4 @@ STLDFLAGS = $(LIBS) $(LDFLAGS)
 #       `$(PKG_CONFIG) --libs freetype2`
 
 # compiler and linker
-# compiler and linker: Indeed, I'd rather use SunStudio12.1 (illumos)
-# or Oracle DevStudio12.2+ (all Solaris distros)
-# CC = c99
+CC = c99

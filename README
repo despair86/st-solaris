@@ -24,7 +24,7 @@ Running st
 If you did not install st with make clean install, you must compile
 the st terminfo entry with the following command:
 
-You may ignore the warnings produced by Solaris tic, or use `gtic -sx`.
+You may ignore the warnings produced by Solaris tic, or use 'gtic -sx'.
 
     tic st.info
 
@@ -43,9 +43,6 @@ distribution remains under the MIT licence.
 This port of st includes the scrollback and spare-font patches by default:
 Dina and a pile of other fixed-width typefaces are not code-set independent
 and may not be able to display all UTF-8 sequences. Additionally the 
-xresourcedb and alpha channel patches are located under `patches/`.
-
-Sun Studio 12.1 or Oracle Developer Studio is recommended on the various 
-Solaris distros.
+xresourcedb and alpha channel patches are located under patches/.
 
 -despair86
